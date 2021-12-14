@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { getCutegories } from './core/apolloClient'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+
+    }
+  }
+
+  componentDidMount() {
+    getCutegories()
+    .then(categories => {
+      this.setState({categories})
+    })
+  }
+
+  render() {
+    console.log(this.state)
+    return (
+      <div>
+        <h1>ZALUPA</h1>
+      </div>
+    )
+  }
 }
 
 export default App;
