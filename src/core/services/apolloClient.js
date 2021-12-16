@@ -11,7 +11,18 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-export const getCutegories = async () => {
+export const loadCurrenciesFN = async () => {
+  const { data } = await client.query({
+    query: gql`
+      query  {
+        currencies
+      }`
+  })
+  const { currencies } = data;
+  return currencies;
+}
+
+export const loadCutegoriesFN = async () => {
   const { data } = await client.query({
     query: gql`
     query categories {

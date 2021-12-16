@@ -1,30 +1,34 @@
 import React from 'react';
-import './App.css';
-import { getCutegories } from './core/apolloClient'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { loadCategoriesThunk, loadCurrenciesThunk } from './core/thunk/overal';
+import Navbar from './components/Navbar/Navbar';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
 
-    }
-  }
-
-  componentDidMount() {
-    getCutegories()
-    .then(categories => {
-      this.setState({categories})
-    })
+  componentDidMount(){
+    this.props.loadCurrencies()
+    this.props.loadCategories()
   }
 
   render() {
-    console.log(this.state)
     return (
-      <div>
-        <h1>ZALUPA</h1>
-      </div>
+      <>
+        <Navbar/>
+      </>
     )
   }
 }
 
-export default App;
+const mapStateToProps = store => ({
+  currencies: store.overalReducer.currencies,
+  categories: store.overalReducer,
+})
+
+const mapDispatchToProps = dispatch => ({
+  loadCurrencies: bindActionCreators(loadCurrenciesThunk, dispatch),
+  loadCategories: bindActionCreators(loadCategoriesThunk, dispatch)
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
