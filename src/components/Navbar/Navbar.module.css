@@ -18,7 +18,7 @@
   text-align: center;
   padding: 10px 0 20px;
   cursor: pointer;
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 .button_container__button_active {
   border-bottom-color: #5ECE7B;
@@ -35,11 +35,17 @@
   object-fit: contain;
   object-position: center;
 }
-.bag_buttons_wrapper {
-  margin-right: 50px;
+.shop_button_wrapper {
   width: 150px;
+  margin-right: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bag_buttons_wrapper {
+  width: 50px;
   background: none;
-  border: none
+  border: none;
 }
 .bag_buttons_wrapper__currency {
   display: flex;
@@ -98,6 +104,11 @@
 .bag_buttons_wrapper__currency__currecnies_list__box .currencies_val {
   width: 70%;
   margin-left: 10px;
+}
+.bag_buttons_wrapper__cart {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 @keyframes active {

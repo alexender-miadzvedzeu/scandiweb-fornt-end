@@ -14,6 +14,11 @@ export const loadCurrenciesFailedAction = error => ({
   error
 })
 
+export const setCurrentCurrencyAction = name => ({
+  type: overalTypes.SET_CURRENT_CURRENCY,
+  name
+})
+
 export const loadCategoriesAction = () => ({
   type: overalTypes.LOAD_CATEGORIES
 })

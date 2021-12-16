@@ -28,6 +28,12 @@ const overalReducer = (state = initialState, action) => {
         error: action.error
       }
 
+    case overalTypes.SET_CURRENT_CURRENCY:
+      return {
+        ...state,
+        currentCurrency: state.currencies.reduce((acc, val) => acc = val === action.name ? val : acc, '')
+      }
+
     case overalTypes.LOAD_CATEGORIES:
       return {
         ...state,

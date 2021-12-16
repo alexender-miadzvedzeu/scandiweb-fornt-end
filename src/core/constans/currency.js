@@ -1,6 +1,6 @@
 export const CURRENCY_ICONS = {
   USD: '$',
-  GPB: '£',
+  GBP: '£',
   AUD: 'A$',
   JPY: '¥',
   RUB: '₽'
