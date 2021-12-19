@@ -9,7 +9,7 @@ class Product extends React.Component {
   render() {
     const { product, currentCurrency } = this.props;
     return (
-      <div className={classes.wrapper}>
+      <div  className={classes.wrapper}>
         <div className={classes.image_container}>
           <img src={product.gallery[0]} alt='image'/>
         </div>

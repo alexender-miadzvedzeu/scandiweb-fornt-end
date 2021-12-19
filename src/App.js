@@ -5,6 +5,17 @@ import { loadCategoriesThunk, loadCurrenciesThunk } from './core/thunk/overal';
 import { loadProductsByCategoryThunk } from './core/thunk/products';
 import Navbar from './components/Navbar/Navbar';
 import Products from './components/Products/Products';
+import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
+import { withRouter } from 'react-router';
+import ProductPage from './components/ProductPage/ProductPage';
 
 class App extends React.Component {
 
@@ -28,12 +39,20 @@ class App extends React.Component {
   loadProductsByCategory = this._loadProductsByCategory.bind(this)
 
   render() {
+    const { url } = this.props.match;
     return (
       <>
         <Navbar 
           loadProductsByCategory={this.loadProductsByCategory}
         />
-        <Products />
+        <Switch>
+          <Route exact path='/'>
+            <Products/>
+          </Route>
+          <Route path={`${url}:productId`}>
+            <ProductPage />
+          </Route>
+        </Switch>
       </>
     )
   }
@@ -52,4 +71,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

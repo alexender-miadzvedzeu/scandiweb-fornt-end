@@ -36,7 +36,6 @@ export const loadCutegoriesFN = async () => {
 }
 
 export const loadProductsByCategoryFN = async name => {
-  
   const { data } = await client.query({
     query: gql`
     query {
@@ -58,4 +57,37 @@ export const loadProductsByCategoryFN = async name => {
   })
   const { products } = data.category;
   return products
+}
+
+export const loadProductByIdFN = async id => {
+  const { data } = await client.query({
+    query: gql`
+    query product {
+      product(id: "${id}") {
+        id,
+        name,
+        inStock,
+        gallery,
+        description,
+        category,
+        attributes{
+          id,
+          name,
+          items {
+            value,
+            displayValue
+          }
+        },
+        prices {
+          currency
+        },
+        prices{
+          amount
+        },
+        brand
+      }
+    }`
+  })
+  const { product } = data;
+  return product
 }

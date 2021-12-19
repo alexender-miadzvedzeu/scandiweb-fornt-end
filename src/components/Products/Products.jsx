@@ -1,19 +1,23 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { nanoid } from 'nanoid';
 import classes from './Products.module.css';
-import { CURRENCY_ICONS } from '../../core/constans/currency'
-import { bindActionCreators } from 'redux';
 import Product from './components/Product';
+import { Link } from "react-router-dom";
 
 class Products extends React.Component {
 
   render() {
     const { products } = this.props;
-
+    
     return (
       <div className={classes.wrapper}>
-        {products && products.map(product => <Product key={product.id} product={product}/>)}
+        {products && products.map(product => {
+          return (
+            <Link key={product.id} to={`/${product.id}`} className={classes.wrapper__links}>
+              <Product product={product}/>
+            </Link> 
+            )
+        })}
       </div>
     )
   }
