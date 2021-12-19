@@ -1,0 +1,17 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 15px;
+  padding: 10px;
+}
+.wrapper__links {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: #000;
+}
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

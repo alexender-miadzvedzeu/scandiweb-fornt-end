@@ -70,7 +70,9 @@ class Navbar extends React.Component {
           <Link to='/cart' className={classes.button_container__links}>
             <button className={classes.bag_buttons_wrapper__cart}>
               <img src={Cart} />
-              {quanity > 0 && <p className={classes.bag_buttons_wrapper__cart__quanity}>{quanity}</p>}
+              {quanity > 0 && <p className={classes.bag_buttons_wrapper__quanity_info}>
+                {quanity}
+              </p>}
             </button>
           </Link>
         </div>
@@ -88,7 +90,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   setCurrentCategory: bindActionCreators(setCurrentCategoryAction, dispatch),
-  setCurrentCurrency: bindActionCreators(setCurrentCurrencyAction, dispatch)
+  setCurrentCurrency: bindActionCreators(setCurrentCurrencyAction, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

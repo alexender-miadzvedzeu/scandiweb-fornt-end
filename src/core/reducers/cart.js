@@ -11,7 +11,10 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         productsBag: [
           ...state.productsBag,
-          action.payload
+          {
+            ...action.payload,
+            quantity: 1
+          }
         ]
       }
     
