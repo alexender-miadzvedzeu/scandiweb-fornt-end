@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux'
 import { loadCategoriesThunk, loadCurrenciesThunk } from './core/thunk/overal';
 import { loadProductsByCategoryThunk } from './core/thunk/products';
 import Navbar from './components/Navbar/Navbar';
-import ProductsPage from './components/ProductsPage/Products';
+import ProductsPage from './pages/ProductsPage/ProductsPage';
+import ProductPage from './pages/ProductPage/ProductPage';
+import CartPage from './pages/CartPage/CartPage';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -15,7 +17,6 @@ import {
   useParams
 } from "react-router-dom";
 import { withRouter } from 'react-router';
-import ProductPage from './components/ProductPage/ProductPage';
 
 class App extends React.Component {
 
@@ -51,6 +52,9 @@ class App extends React.Component {
           </Route>
           <Route path={`${url}:productId`}>
             <ProductPage />
+          </Route>
+          <Route path='/cart'>
+            <CartPage />
           </Route>
         </Switch>
       </>
