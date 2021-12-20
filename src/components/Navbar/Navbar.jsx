@@ -38,7 +38,6 @@ class Navbar extends React.Component {
   render() {
     const { categories, currentCurrency, currentCategory, setCurrentCategory, setCurrentCurrency, loadProductsByCategory, quanity, shopingBag } = this.props;
     const { showCurrencies, showBagPopup } = this.state;
-    console.log(shopingBag)
     const loadProducts = name => () => {
       this.setState({
         showCurrencies: false,
