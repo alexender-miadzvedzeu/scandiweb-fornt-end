@@ -46,15 +46,16 @@ class App extends React.Component {
         <Navbar 
           loadProductsByCategory={this.loadProductsByCategory}
         />
+        
         <Switch>
           <Route exact path='/'>
             <ProductsPage/>
           </Route>
+          <Route path='/cart'>
+            <CartPage/>
+          </Route>
           <Route path={`${url}:productId`}>
             <ProductPage />
-          </Route>
-          <Route path='/cart'>
-            <CartPage />
           </Route>
         </Switch>
       </>

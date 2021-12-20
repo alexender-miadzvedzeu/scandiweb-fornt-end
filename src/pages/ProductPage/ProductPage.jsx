@@ -37,7 +37,7 @@ class ProductPage extends React.Component {
     const addToCart = () => {
       if (isValidAttributes) {
         addProductToCart(currentProduct);
-        this.props.history.push('/')
+        this.props.history.push('/cart')
       } else {
         this.setState({ 
           error: true,

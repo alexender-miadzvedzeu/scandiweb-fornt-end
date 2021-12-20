@@ -1,0 +1,101 @@
+.wrapper {
+  padding: 50px 80px 0;
+}
+.wrapper__empty_cart {
+  width: 100%;
+  margin: 10% 0 0;
+  text-align: center;
+  font-weight: 500;
+}
+.wrapper__title {
+  font-weight: 700;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+.wrapper__items__item {
+  border-top: 1px solid #E5E5E5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 10px 0;
+}
+.wrapper__items__item__info {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper__items__item__info__brand {
+  font-weight: 600;
+  font-size: 30px;
+}
+.wrapper__items__item__info__name {
+  font-weight: 400;
+  font-size: 30px;
+  margin: 15px 0 12px;
+}
+.wrapper__items__item__info__amount {
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+.wrapper__items__item__info__attributes__name {
+  font-weight: 600;
+  font-size: 20px;
+  margin: 5px 0;
+}
+.wrapper__items__item__info__attributes__box {
+  display: flex;
+  margin-bottom: 10px;
+}
+.wrapper__info__attributes__box__attribute_selected,
+.wrapper__info__attributes__box__attribute {
+  padding: 5px 5px;
+  margin-right: 10px;
+  min-width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.wrapper__info__attributes__box__attribute_selected {
+  background: #000;
+  color: #fff;
+}
+.wrapper__items__item__quanity_buttons {
+  height: 180px;
+  display: flex;
+  justify-content: center;
+}
+.wrapper__items__item__quanity_buttons_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5px;
+  height: 180px;
+}
+.wrapper__items__item__quanity_buttons_wrapper__button,
+.wrapper__items__item__quanity_buttons_wrapper__val {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper__items__item__quanity_buttons_wrapper__button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  background: none;
+  cursor: pointer;
+}
+.wrapper__items__item__quanity_buttons__image_wrapper {
+  height: 180px;
+  width: 180px;
+  box-shadow: 0px 0px 10px 1px rgba(97, 97, 97, 0.144);
+}
+.wrapper__items__item__quanity_buttons__image_wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}

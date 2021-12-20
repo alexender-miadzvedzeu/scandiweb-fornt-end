@@ -83,7 +83,7 @@ const mapStateToProps = store => ({
   categories: store.overalReducer.categories,
   currentCurrency: store.overalReducer.currentCurrency,
   currentCategory: store.overalReducer.currentCategory,
-  quanity: store.cartReducer.productsBag.length
+  quanity: store.cartReducer.shopingBag.length
 })
 
 const mapDispatchToProps = dispatch => ({
