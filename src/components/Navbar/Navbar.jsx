@@ -9,27 +9,41 @@ import { CURRENCY_ICONS } from '../../core/constans/currency'
 import { bindActionCreators } from 'redux';
 import { setCurrentCategoryAction, setCurrentCurrencyAction } from '../../core/actions/overal';
 import { Link } from "react-router-dom";
+import Popup from '../Popup/Popup';
 
 class Navbar extends React.Component {
 
   constructor() {
     super()
     this.state = {
-      showCurrencies: false
+      showCurrencies: false,
+      showBagPopup: false
     }
   }
 
   toogleShowCurrencies() {
     this.setState(prevState => ({
-      showCurrencies: !prevState.showCurrencies
+      showCurrencies: !prevState.showCurrencies,
+      showBagPopup: false
+    }))
+  }
+
+  toogleShowBagPopup() {
+    this.setState(prevState => ({
+      showCurrencies: false,
+      showBagPopup: !prevState.showBagPopup,
     }))
   }
 
   render() {
-    const { categories, currentCurrency, currentCategory, setCurrentCategory, setCurrentCurrency, loadProductsByCategory, quanity } = this.props;
-    const { showCurrencies } = this.state;
-
+    const { categories, currentCurrency, currentCategory, setCurrentCategory, setCurrentCurrency, loadProductsByCategory, quanity, shopingBag } = this.props;
+    const { showCurrencies, showBagPopup } = this.state;
+    console.log(shopingBag)
     const loadProducts = name => () => {
+      this.setState({
+        showCurrencies: false,
+        showBagPopup: false,
+      })
       setCurrentCategory(name)
       loadProductsByCategory(name)
     }
@@ -67,12 +81,17 @@ class Navbar extends React.Component {
               </div>
             </div>
           </button>
-          <Link to='/cart' className={classes.button_container__links}>
-            <button className={classes.bag_buttons_wrapper__cart}>
-              <img src={Cart} />
-              {quanity > 0 && <p className={classes.bag_buttons_wrapper__cart__quanity}>{quanity}</p>}
-            </button>
-          </Link>
+          <button onClick={() => this.toogleShowBagPopup()} className={classes.bag_buttons_wrapper__cart}>
+            <img src={Cart} />
+            {quanity > 0 && <p className={classes.bag_buttons_wrapper__cart__quanity}>{quanity}</p>}
+          </button>
+          <div className={!showBagPopup ? classes.bag_buttons_wrapper__cart__popup : classes.bag_buttons_wrapper__cart__popup__opened}>
+            {shopingBag && shopingBag.length > 0 && (
+              <>
+                <Popup toogleShowBagPopup={this.toogleShowBagPopup.bind(this)}/>
+              </>
+            )}
+          </div>
         </div>
       </div>
     )
@@ -83,7 +102,8 @@ const mapStateToProps = store => ({
   categories: store.overalReducer.categories,
   currentCurrency: store.overalReducer.currentCurrency,
   currentCategory: store.overalReducer.currentCategory,
-  quanity: store.cartReducer.shopingBag.length
+  quanity: store.cartReducer.shopingBag.length,
+  shopingBag: store.cartReducer.shopingBag
 })
 
 const mapDispatchToProps = dispatch => ({

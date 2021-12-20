@@ -142,3 +142,40 @@
     color: #5ECE7B;
   }
 }
+.bag_buttons_wrapper__cart__popup {
+  display: none;
+}
+.bag_buttons_wrapper__cart__popup__opened {
+  min-width: 400px;
+  background: #fff;
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  animation: open 0.3s;
+  z-index: 100;
+}
+.bag_buttons_wrapper__cart__popup__opened__links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.bag_buttons_wrapper__cart__popup__opened__links__button {
+  width: 40%;
+}
+.bag_buttons_wrapper__cart__popup__opened__links__button:first-of-type {
+  border: 1px solid #000;
+  background: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 15px;
+  text-transform: uppercase;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
