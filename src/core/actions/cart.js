@@ -17,3 +17,8 @@ export const changeProductQuanityInCartAction = (productId, val) => ({
   productId,
   val
 })
+
+export const removeFromBagAction = productId => ({
+  type: cartTypes.REMOVE_FROM_BAG,
+  productId
+})

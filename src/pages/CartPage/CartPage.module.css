@@ -46,6 +46,18 @@
   display: flex;
   margin-bottom: 10px;
 }
+.wrapper__items__item__info__remove_button {
+  width: auto;
+  margin: 10px 0 0;
+  text-transform: lowercase;
+  color: rgb(189, 95, 95);
+  border: none;
+  background: none;
+  text-align: left;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+}
 .wrapper__info__attributes__box__attribute_selected,
 .wrapper__info__attributes__box__attribute {
   padding: 5px 5px;

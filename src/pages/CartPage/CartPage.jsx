@@ -5,7 +5,7 @@ import classes from './CartPage.module.css';
 import { withRouter } from "react-router-dom";
 import { CURRENCY_ICONS } from '../../core/constans/currency';
 import { nanoid } from 'nanoid';
-import { changeProductAttributeInCartAction, changeProductQuanityInCartAction } from '../../core/actions/cart';
+import { changeProductAttributeInCartAction, changeProductQuanityInCartAction, removeFromBagAction } from '../../core/actions/cart';
 
 class CartPage extends React.Component {
 
@@ -16,7 +16,7 @@ class CartPage extends React.Component {
   }
 
   render() {
-    const { shopingBag, currentCurrency, changeProductAttributeInCart, changeQuanityInCart } = this.props;
+    const { shopingBag, currentCurrency, changeProductAttributeInCart, changeQuanityInCart, removeFromBag } = this.props;
 
     return (
       <div className={classes.wrapper}>
@@ -64,6 +64,7 @@ class CartPage extends React.Component {
                             </div>
                           )})}
                       </div>
+                      <button onClick={() => removeFromBag(product.id)} className={classes.wrapper__items__item__info__remove_button}>Remove</button>
                     </div>
                     <div className={classes.wrapper__items__item__quanity_buttons}>
                       <div className={classes.wrapper__items__item__quanity_buttons_wrapper}>
@@ -97,7 +98,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   changeProductAttributeInCart: bindActionCreators(changeProductAttributeInCartAction, dispatch),
-  changeQuanityInCart: bindActionCreators(changeProductQuanityInCartAction, dispatch)
+  changeQuanityInCart: bindActionCreators(changeProductQuanityInCartAction, dispatch),
+  removeFromBag: bindActionCreators(removeFromBagAction, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CartPage));

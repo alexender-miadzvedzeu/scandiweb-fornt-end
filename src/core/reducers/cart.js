@@ -86,6 +86,15 @@ const cartReducer = (state = initialState, action) => {
         default:
           return state;
       }
+    
+    case cartTypes.REMOVE_FROM_BAG:
+      return {
+        ...state,
+        shopingBag: [
+          ...state.shopingBag
+        ].filter(el => el.id !== action.productId)
+      }
+    
     default:
       return state
   }
