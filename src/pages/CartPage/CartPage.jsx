@@ -26,7 +26,7 @@ class CartPage extends React.Component {
               Cart
             </h3>
             <div className={classes.wrapper__items}>
-              {shopingBag.map(product => {
+              {shopingBag.map((product, index) => {
                 return (
                   <div key={nanoid()} className={classes.wrapper__items__item}>
                     <div className={classes.wrapper__items__item__info}>
@@ -64,7 +64,7 @@ class CartPage extends React.Component {
                             </div>
                           )})}
                       </div>
-                      <button onClick={() => removeFromBag(product.id)} className={classes.wrapper__items__item__info__remove_button}>Remove</button>
+                      <button onClick={() => removeFromBag(index)} className={classes.wrapper__items__item__info__remove_button}>Remove</button>
                     </div>
                     <div className={classes.wrapper__items__item__quanity_buttons}>
                       <div className={classes.wrapper__items__item__quanity_buttons_wrapper}>

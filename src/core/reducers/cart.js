@@ -92,7 +92,7 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         shopingBag: [
           ...state.shopingBag
-        ].filter(el => el.id !== action.productId)
+        ].filter((el, index) => index !== action.index)
       }
     
     default:
