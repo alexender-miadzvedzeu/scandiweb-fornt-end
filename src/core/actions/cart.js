@@ -5,16 +5,16 @@ export const addProductToCartAction = payload => ({
   payload
 })
 
-export const changeProductAttributeInCartAction = (productId, attrType, val) => ({
+export const changeProductAttributeInCartAction = (index, attrType, val) => ({
   type: cartTypes.CHANGE_PRODUCT_ATTRIBUTE_IN_CART,
-  productId,
+  index,
   attrType,
   val
 })
 
-export const changeProductQuanityInCartAction = (productId, val) => ({
+export const changeProductQuanityInCartAction = (index, val) => ({
   type: cartTypes.CHANGE_PRODUCT_QUANITY_IN_CART,
-  productId,
+  index,
   val
 })
 

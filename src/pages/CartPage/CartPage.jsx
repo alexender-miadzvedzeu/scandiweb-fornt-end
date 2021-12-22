@@ -52,7 +52,7 @@ class CartPage extends React.Component {
                                 {atr.items.map(val => {
                                   return (
                                     <div
-                                      onClick={() => changeProductAttributeInCart(product.id, atr.id, val.value)}
+                                      onClick={() => changeProductAttributeInCart(index, atr.id, val.value)}
                                       className={val.selected ? classes.wrapper__info__attributes__box__attribute_selected : classes.wrapper__info__attributes__box__attribute}
                                       key={nanoid()}
                                     >
@@ -68,11 +68,11 @@ class CartPage extends React.Component {
                     </div>
                     <div className={classes.wrapper__items__item__quanity_buttons}>
                       <div className={classes.wrapper__items__item__quanity_buttons_wrapper}>
-                          <button onClick={() => changeQuanityInCart(product.id, 'inc')} className={classes.wrapper__items__item__quanity_buttons_wrapper__button}>+</button>
+                          <button onClick={() => changeQuanityInCart(index, 'inc')} className={classes.wrapper__items__item__quanity_buttons_wrapper__button}>+</button>
                           <p className={classes.wrapper__items__item__quanity_buttons_wrapper__val}>
                             {product.quantity}
                           </p>
-                          <button onClick={() => changeQuanityInCart(product.id, 'dec')} className={classes.wrapper__items__item__quanity_buttons_wrapper__button}>-</button>
+                          <button onClick={() => changeQuanityInCart(index, 'dec')} className={classes.wrapper__items__item__quanity_buttons_wrapper__button}>-</button>
                       </div>
                       <div className={classes.wrapper__items__item__quanity_buttons__image_wrapper}>
                         <img src={product.gallery[0]} alt='img'/>
