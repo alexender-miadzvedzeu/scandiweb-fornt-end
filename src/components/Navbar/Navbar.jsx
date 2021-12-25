@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux';
 import { setCurrentCategoryAction, setCurrentCurrencyAction } from '../../core/actions/overal';
 import { Link } from "react-router-dom";
 import Popup from '../Popup/Popup';
+import { loadProductsByCategoryThunk } from '../../core/thunk/products';
 
 class Navbar extends React.Component {
 
@@ -107,7 +108,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   setCurrentCategory: bindActionCreators(setCurrentCategoryAction, dispatch),
-  setCurrentCurrency: bindActionCreators(setCurrentCurrencyAction, dispatch)
+  setCurrentCurrency: bindActionCreators(setCurrentCurrencyAction, dispatch),
+  loadProductsByCategory: bindActionCreators(loadProductsByCategoryThunk, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

@@ -19,7 +19,6 @@ const cartReducer = (state = initialState, action) => {
       }
 
     case cartTypes.CHANGE_PRODUCT_ATTRIBUTE_IN_CART:
-      console.log(action.index)
       const { attrType, val } = action;
       return {
         ...state,

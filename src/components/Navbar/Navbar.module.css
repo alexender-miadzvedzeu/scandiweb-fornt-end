@@ -87,6 +87,7 @@
   border-radius: 3px;
   transition: opacity 0.3s;
   background: #fff;
+  z-index: 1;
 }
 .bag_buttons_wrapper__currency__currecnies_list {
   position: absolute;

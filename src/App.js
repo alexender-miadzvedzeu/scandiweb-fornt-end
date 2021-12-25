@@ -33,20 +33,11 @@ class App extends React.Component {
     })
   }
 
-  _loadProductsByCategory(currentCategory) {
-    this.props.loadProductsByCategory(currentCategory)
-  }  
-
-  loadProductsByCategory = this._loadProductsByCategory.bind(this)
-
   render() {
     const { url } = this.props.match;
     return (
       <>
-        <Navbar 
-          loadProductsByCategory={this.loadProductsByCategory}
-        />
-        
+        <Navbar />
         <Switch>
           <Route exact path='/'>
             <ProductsPage/>
