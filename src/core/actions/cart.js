@@ -22,3 +22,9 @@ export const removeFromBagAction = index => ({
   type: cartTypes.REMOVE_FROM_BAG,
   index
 })
+
+export const listImageAction = (opt, index) => ({
+  type: cartTypes.LIST_IMAGE,
+  opt,
+  index
+})

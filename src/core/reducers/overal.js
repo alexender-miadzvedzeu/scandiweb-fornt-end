@@ -1,7 +1,8 @@
 import { overalTypes } from "../actions/types";
 
 const initialState = {
-  currencies: []
+  categories:[{ name: 'tech' }, { name: 'clothes' } ],
+  currentCategory: 'tech'
 }
 
 const overalReducer = (state = initialState, action) => {

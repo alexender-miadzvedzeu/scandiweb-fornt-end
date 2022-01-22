@@ -8,15 +8,18 @@ class Products extends React.Component {
 
   render() {
     const { products } = this.props;
-    
+
     return (
       <div className={classes.wrapper}>
         {products && products.map(product => {
           return (
-            <Link key={product.id} to={`/${product.id}`} className={classes.wrapper__links}>
-              <Product product={product}/>
-            </Link> 
-            )
+            product.inStock ? (
+              <Link key={product.id} to={`/${product.id}`} className={classes.wrapper__links}>
+                <Product product={product} inStock={product.inStock} />
+              </Link>
+            ) : (
+              <Product key={product.id} product={product} inStock={product.inStock} />
+            ))
         })}
       </div>
     )

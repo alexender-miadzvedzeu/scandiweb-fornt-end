@@ -7,6 +7,7 @@ import {
   loadProductByIdFaildedAction
 } from "../actions/products"
 import { loadProductsByCategoryFN, loadProductByIdFN } from "../services/apolloClient"
+import { isBadUrl } from "../helpers/isBadUrl"
 
 export const loadProductsByCategoryThunk = name => {
   return dispatch => {
@@ -29,7 +30,19 @@ export const loadProductByIdThunk = name => {
     dispatch(loadProductByIdAction())
     return new Promise(async(resolve, reject) => {
       try {
-        const product = await loadProductByIdFN(name)
+        let product = await loadProductByIdFN(name)
+        let badUrls = [];
+        let normalUrls = [];
+        for await(const url of product.gallery) {
+          if (await isBadUrl(url)) {
+            badUrls.push(url)
+          }
+        }
+        normalUrls = product.gallery.filter(el => !badUrls.some(url => url === el))
+        product = {
+          ...product,
+          gallery: normalUrls
+        }
         dispatch(loadProductByIdSuccessAction(product))
         resolve(product)
       } catch (error) {

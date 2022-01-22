@@ -97,3 +97,7 @@
   line-height: 20px;
   margin-top: 20px;
 }
+.wrapper__productDescription h1 {
+  line-height: 25px;
+  margin-bottom: 10px;
+}

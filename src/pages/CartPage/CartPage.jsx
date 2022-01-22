@@ -5,7 +5,8 @@ import classes from './CartPage.module.css';
 import { withRouter } from "react-router-dom";
 import { CURRENCY_ICONS } from '../../core/constans/currency';
 import { nanoid } from 'nanoid';
-import { changeProductAttributeInCartAction, changeProductQuanityInCartAction, removeFromBagAction } from '../../core/actions/cart';
+import { changeProductAttributeInCartAction, changeProductQuanityInCartAction, listImageAction, removeFromBagAction } from '../../core/actions/cart';
+import Arrow from '../../icons/Vector.png'
 
 class CartPage extends React.Component {
 
@@ -16,7 +17,11 @@ class CartPage extends React.Component {
   }
 
   render() {
-    const { shopingBag, currentCurrency, changeProductAttributeInCart, changeQuanityInCart, removeFromBag } = this.props;
+    const { shopingBag, currentCurrency, changeProductAttributeInCart, changeQuanityInCart, removeFromBag, listImage } = this.props;
+
+    const listImageHandler = (opt, index) => () => {
+      listImage(opt, index)
+    }
 
     return (
       <div className={classes.wrapper}>
@@ -75,7 +80,13 @@ class CartPage extends React.Component {
                           <button onClick={() => changeQuanityInCart(index, 'dec')} className={classes.wrapper__items__item__quanity_buttons_wrapper__button}>-</button>
                       </div>
                       <div className={classes.wrapper__items__item__quanity_buttons__image_wrapper}>
-                        <img src={product.gallery[0]} alt='img'/>
+                        {product.gallery.length > 1 && <button onClick={listImageHandler('prev', index)} className={classes.wrapper__items__item__quanity_buttons__image_wrapper__prev}>
+                          <img src={Arrow} alt='arrow'/>
+                        </button>}
+                        <img src={product.currentImage.url} alt='img'/>
+                        {product.gallery.length > 1 && <button onClick={listImageHandler('next', index)} className={classes.wrapper__items__item__quanity_buttons__image_wrapper__next}>
+                          <img src={Arrow} alt='arrow'/>
+                        </button>}
                       </div>
                     </div>
                   </div>
@@ -99,7 +110,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   changeProductAttributeInCart: bindActionCreators(changeProductAttributeInCartAction, dispatch),
   changeQuanityInCart: bindActionCreators(changeProductQuanityInCartAction, dispatch),
-  removeFromBag: bindActionCreators(removeFromBagAction, dispatch)
+  removeFromBag: bindActionCreators(removeFromBagAction, dispatch),
+  listImage: bindActionCreators(listImageAction, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CartPage));

@@ -13,6 +13,10 @@ const cartReducer = (state = initialState, action) => {
           ...state.shopingBag,
           {
             ...action.payload,
+            currentImage:{
+              url: action.payload.gallery[0],
+              index: 0
+            },
             quantity: 1
           }
         ]
@@ -95,6 +99,46 @@ const cartReducer = (state = initialState, action) => {
         ].filter((el, index) => index !== action.index)
       }
     
+    case cartTypes.LIST_IMAGE:
+      switch (action.opt) {
+        case 'prev':
+          return {
+            ...state,
+            shopingBag: [
+              ...state.shopingBag
+            ].map((el, index) => 
+              index === action.index ?
+              {
+                ...el,
+                currentImage: {
+                  ...el.currentImage,
+                  index: el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1,
+                  url: el.gallery[el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1]
+                }
+              } : el
+            )
+          }
+        case 'next':
+          return {
+            ...state,
+            shopingBag: [
+              ...state.shopingBag
+            ].map((el, index) => 
+              index === action.index ?
+              {
+                ...el,
+                currentImage: {
+                  ...el.currentImage,
+                  index: el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1,
+                  url: el.gallery[el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1]
+                }
+              } : el
+            )
+          }
+      }
+      return {
+        ...state
+      }
     default:
       return state
   }

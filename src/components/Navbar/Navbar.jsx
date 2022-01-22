@@ -22,22 +22,37 @@ class Navbar extends React.Component {
     }
   }
 
-  toogleShowCurrencies() {
+  closePopups(){
     this.setState(prevState => ({
-      showCurrencies: !prevState.showCurrencies,
+      showCurrencies: false,
       showBagPopup: false
     }))
   }
 
-  toogleShowBagPopup() {
+  toogleShowCurrencies(e) {
+    window.addEventListener('scroll', this.closePopups.bind(this))
+    e.stopPropagation()
     this.setState(prevState => ({
-      showCurrencies: false,
-      showBagPopup: !prevState.showBagPopup,
+      showCurrencies: !prevState.showCurrencies,
+      showBagPopup: false
     }))
+    window.removeEventListener('scroll', this.closePopups.bind(this))
+  }
+
+  toogleShowBagPopup() {
+    const { shopingBag } = this.props;
+    window.addEventListener('scroll', this.closePopups.bind(this))
+    if (shopingBag && shopingBag.length > 0) {
+      this.setState(prevState => ({
+        showCurrencies: false,
+        showBagPopup: !prevState.showBagPopup,
+      }))
+    }
+    window.removeEventListener('scroll', this.closePopups.bind(this))
   }
 
   render() {
-    const { categories, currentCurrency, currentCategory, setCurrentCategory, setCurrentCurrency, loadProductsByCategory, quanity, shopingBag } = this.props;
+    const { categories, currentCurrency, currentCategory, setCurrentCategory, setCurrentCurrency, loadProductsByCategory, shopingBag } = this.props;
     const { showCurrencies, showBagPopup } = this.state;
     const loadProducts = name => () => {
       this.setState({
@@ -47,7 +62,9 @@ class Navbar extends React.Component {
       setCurrentCategory(name)
       loadProductsByCategory(name)
     }
-
+    
+    const quanity = shopingBag.reduce((res, val) => res += val.quantity, 0)
+    
     return (
       <div className={classes.wrapper}>
         <div className={classes.button_container}>
@@ -63,7 +80,7 @@ class Navbar extends React.Component {
           <img src={Logo} />
         </div>
         <div className={classes.shop_button_wrapper}>
-          <button onClick={() => this.toogleShowCurrencies()} className={classes.bag_buttons_wrapper}>
+          <button onClick={(e) => this.toogleShowCurrencies(e)} className={classes.bag_buttons_wrapper}>
             <div className={classes.bag_buttons_wrapper__currency}>
               <div className={classes.bag_buttons_wrapper__currency__logo}>
                 {CURRENCY_ICONS[currentCurrency]}
@@ -71,25 +88,27 @@ class Navbar extends React.Component {
               <div className={!showCurrencies ? classes.bag_buttons_wrapper__currency__arrow : classes.bag_buttons_wrapper__currency__arrow_opened}>
                 <img src={Arrow} alt='arrow' />
               </div>
-              <div className={!showCurrencies ? classes.bag_buttons_wrapper__currency__currecnies_list : classes.bag_buttons_wrapper__currency__currecnies_list_opened}>
-                {Object.keys(CURRENCY_ICONS).map(el =>
-                  <div onClick={() => setCurrentCurrency(el)} key={nanoid()} className={classes.bag_buttons_wrapper__currency__currecnies_list__box}>
-                    <div className={classes.currencies_logo}>{CURRENCY_ICONS[el]}</div>
-                    <div className={classes.currencies_val}>{el}</div>
-                  </div>
-                )}
+              <div onClick={(e) => this.toogleShowCurrencies(e)} className={!showCurrencies ? classes.bag_buttons_wrapper__currency__bg__none : classes.bag_buttons_wrapper__currency__bg}>
+                <div className={!showCurrencies ? classes.bag_buttons_wrapper__currency__bg__currecnies_list : classes.bag_buttons_wrapper__currency__bg__currecnies_list_opened}>
+                  {Object.keys(CURRENCY_ICONS).map(el =>
+                    <div onClick={() => setCurrentCurrency(el)} key={nanoid()} className={classes.bag_buttons_wrapper__currency__bg__currecnies_list__box}>
+                      <div className={classes.currencies_logo}>{CURRENCY_ICONS[el]}</div>
+                      <div className={classes.currencies_val}>{el}</div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </button>
-          <button onClick={() => this.toogleShowBagPopup()} className={classes.bag_buttons_wrapper__cart}>
+          <button onClick={this.toogleShowBagPopup.bind(this)} className={classes.bag_buttons_wrapper__cart}>
             <img src={Cart} />
             {quanity > 0 && <p className={classes.bag_buttons_wrapper__cart__quanity}>{quanity}</p>}
           </button>
           <div className={!showBagPopup ? classes.bag_buttons_wrapper__cart__popup : classes.bag_buttons_wrapper__cart__popup__opened}>
             {shopingBag && shopingBag.length > 0 && (
-              <>
+              <div className={classes.bag_buttons_wrapper__cart__popup__opened__background}>
                 <Popup toogleShowBagPopup={this.toogleShowBagPopup.bind(this)}/>
-              </>
+              </div>
             )}
           </div>
         </div>
@@ -102,7 +121,6 @@ const mapStateToProps = store => ({
   categories: store.overalReducer.categories,
   currentCurrency: store.overalReducer.currentCurrency,
   currentCategory: store.overalReducer.currentCategory,
-  quanity: store.cartReducer.shopingBag.length,
   shopingBag: store.cartReducer.shopingBag
 })
 

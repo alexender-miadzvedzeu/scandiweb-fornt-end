@@ -25,12 +25,9 @@ class App extends React.Component {
   }
 
   componentDidMount(){
+    const { currentCategory } = this.props
     this.props.loadCurrencies()
-    this.props.loadCategories()
-    .then(() => {
-      const { currentCategory } = this.props
-      this.props.loadProductsByCategory(currentCategory)
-    })
+    this.props.loadProductsByCategory(currentCategory)
   }
 
   render() {
@@ -62,7 +59,6 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   loadCurrencies: bindActionCreators(loadCurrenciesThunk, dispatch),
-  loadCategories: bindActionCreators(loadCategoriesThunk, dispatch),
   loadProductsByCategory: bindActionCreators(loadProductsByCategoryThunk, dispatch)
 })
 
