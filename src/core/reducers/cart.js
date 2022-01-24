@@ -10,16 +10,31 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         shopingBag: [
-          ...state.shopingBag,
-          {
-            ...action.payload,
-            currentImage:{
-              url: action.payload.gallery[0],
-              index: 0
-            },
-            quantity: 1
-          }
-        ]
+          ...state.shopingBag
+        ].some(el => JSON.stringify(el.attributes) === JSON.stringify(action.payload.attributes)) ?
+          [
+            ...state.shopingBag
+          ].reduce((res, val) => JSON.stringify(val.attributes) === JSON.stringify(action.payload.attributes) ? 
+            [
+              ...res,
+              {
+                ...val,
+                quantity: val.quantity + 1
+              }
+            ] : [
+              ...res,
+              val
+            ], []) : [
+            ...state.shopingBag,
+            {
+              ...action.payload,
+              currentImage: {
+                url: action.payload.gallery[0],
+                index: 0
+              },
+              quantity: 1
+            }
+          ]
       }
 
     case cartTypes.CHANGE_PRODUCT_ATTRIBUTE_IN_CART:
@@ -106,16 +121,16 @@ const cartReducer = (state = initialState, action) => {
             ...state,
             shopingBag: [
               ...state.shopingBag
-            ].map((el, index) => 
+            ].map((el, index) =>
               index === action.index ?
-              {
-                ...el,
-                currentImage: {
-                  ...el.currentImage,
-                  index: el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1,
-                  url: el.gallery[el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1]
-                }
-              } : el
+                {
+                  ...el,
+                  currentImage: {
+                    ...el.currentImage,
+                    index: el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1,
+                    url: el.gallery[el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1]
+                  }
+                } : el
             )
           }
         case 'next':
@@ -123,16 +138,16 @@ const cartReducer = (state = initialState, action) => {
             ...state,
             shopingBag: [
               ...state.shopingBag
-            ].map((el, index) => 
+            ].map((el, index) =>
               index === action.index ?
-              {
-                ...el,
-                currentImage: {
-                  ...el.currentImage,
-                  index: el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1,
-                  url: el.gallery[el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1]
-                }
-              } : el
+                {
+                  ...el,
+                  currentImage: {
+                    ...el.currentImage,
+                    index: el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1,
+                    url: el.gallery[el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1]
+                  }
+                } : el
             )
           }
       }
