@@ -47,11 +47,23 @@ export const loadProductsByCategoryFN = async name => {
           name,
           inStock,
           gallery,
-          brand,
+          description,
+          category,
+          attributes{
+            id,
+            name,
+            items {
+              value,
+              displayValue
+            }
+          },
           prices {
-            currency,
+            currency
+          },
+          prices{
             amount
-          }
+          },
+          brand
         }
       }
     }`

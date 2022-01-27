@@ -4,3 +4,7 @@
   box-sizing: border-box;
   font-family: 'Raleway';
 }
+a {
+  color: #000;
+  text-decoration: none;
+}

@@ -44,7 +44,6 @@ class ProductPage extends React.Component {
         })
       }
     }
-
     return (
       <div className={classes.wrapper}>
         {currentProduct && (
@@ -60,7 +59,7 @@ class ProductPage extends React.Component {
                 />)}
               </div>
               <div className={classes.wrapper__gallery__currentImage}>
-                <img src={currentImgUrl ? currentImgUrl : currentProduct.gallery[0]} />
+                <img alt='img' src={currentImgUrl ? currentImgUrl : currentProduct.gallery[0]} />
               </div>
             </div>
             <div className={classes.wrapper__info}>
@@ -85,7 +84,9 @@ class ProductPage extends React.Component {
                             <div 
                               style={{background: val.value}}
                               onClick={() => changeProductAttribute(atr.id, val.value)} 
-                              className={val.selected ? classes.wrapper__info__attributes__box__attribute_selected : classes.wrapper__info__attributes__box__attribute} 
+                              className={val.selected ? 
+                                classes.wrapper__info__attributes__box__attribute_selected : 
+                                classes.wrapper__info__attributes__box__attribute} 
                               key={nanoid()}
                             >
                               {val.displayValue}
@@ -109,7 +110,10 @@ class ProductPage extends React.Component {
               <button onClick={addToCart} className={classes.wrapper__addToCartButton}>
                 Add to cart
               </button>
-              <div className={classes.wrapper__productDescription} dangerouslySetInnerHTML={{ __html: currentProduct.description}}></div>
+              <div 
+                className={classes.wrapper__productDescription} 
+                dangerouslySetInnerHTML={{ __html: currentProduct.description}}
+              ></div>
             </div>
           </>
         )}

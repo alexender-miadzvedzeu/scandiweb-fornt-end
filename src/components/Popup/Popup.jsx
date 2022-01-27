@@ -16,8 +16,22 @@ class Popup extends React.Component {
     }
   }
 
+  changeQuanityInCartHandle(index, type, e){
+    e.stopPropagation()
+    this.props.changeQuanityInCart(index, type)
+  }
+
+  changeProductAttributeInCartHandle(index, id, value, e){
+    e.stopPropagation()
+    this.props.changeProductAttributeInCart(index, id, value, e)
+  }
+
   render() {
-    const { shopingBag, currentCurrency, changeProductAttributeInCart, changeQuanityInCart, toogleShowBagPopup } = this.props;
+    const { 
+      shopingBag, 
+      currentCurrency,  
+      closeBagPopupHandle 
+    } = this.props;
 
     return (
       <div className={classes.wrapper}>
@@ -26,7 +40,10 @@ class Popup extends React.Component {
             <div className={classes.wrapper__items}>
               {shopingBag.map((product, index) => {
                 return (
-                  <div key={nanoid()} className={classes.wrapper__items__item}>
+                  <div 
+                    key={nanoid()} 
+                    className={classes.wrapper__items__item}
+                  >
                     <div className={classes.wrapper__items__item__info}>
                       <span className={classes.wrapper__items__item__info__brand}>
                         {product.brand}
@@ -50,8 +67,11 @@ class Popup extends React.Component {
                                 {atr.items.map(val => {
                                   return (
                                     <div
-                                      onClick={() => changeProductAttributeInCart(index, atr.id, val.value)}
-                                      className={val.selected ? classes.wrapper__info__attributes__box__attribute_selected : classes.wrapper__info__attributes__box__attribute}
+                                      onClick={(e) => this.changeProductAttributeInCartHandle(index, atr.id, val.value, e)}
+                                      className={val.selected ? 
+                                        classes.wrapper__info__attributes__box__attribute_selected : 
+                                        classes.wrapper__info__attributes__box__attribute
+                                      }
                                       key={nanoid()}
                                     >
                                       {val.displayValue}
@@ -65,11 +85,17 @@ class Popup extends React.Component {
                     </div>
                     <div className={classes.wrapper__items__item__quanity_buttons}>
                       <div className={classes.wrapper__items__item__quanity_buttons_wrapper}>
-                          <button onClick={() => changeQuanityInCart(index, 'inc')} className={classes.wrapper__items__item__quanity_buttons_wrapper__button}>+</button>
+                          <button 
+                            onClick={(e) => this.changeQuanityInCartHandle(index, 'inc', e)} 
+                            className={classes.wrapper__items__item__quanity_buttons_wrapper__button}
+                          >+</button>
                           <p className={classes.wrapper__items__item__quanity_buttons_wrapper__val}>
                             {product.quantity}
                           </p>
-                          <button onClick={() => changeQuanityInCart(index, 'dec')} className={classes.wrapper__items__item__quanity_buttons_wrapper__button}>-</button>
+                          <button 
+                            onClick={(e) => this.changeQuanityInCartHandle(index, 'dec', e)} 
+                            className={classes.wrapper__items__item__quanity_buttons_wrapper__button}
+                          >-</button>
                       </div>
                       <div className={classes.wrapper__items__item__quanity_buttons__image_wrapper}>
                         <img src={product.gallery[0]} alt='img'/>
@@ -78,13 +104,18 @@ class Popup extends React.Component {
                   </div>
                 )
               })}
-              <div className={classes.bag_buttons_wrapper__cart__popup__opened__links}>
-                <Link onClick={() => toogleShowBagPopup()} to='/cart' >
-                  <button className={classes.bag_buttons_wrapper__cart__popup__opened__links__button}>View bag</button>
-                </Link>
-                <button className={classes.bag_buttons_wrapper__cart__popup__opened__links__checkout_button}>Check out</button>
-              </div>
             </div>
+            <div className={classes.bag_buttons_wrapper__cart__popup__opened__links}>
+                <Link to='/cart' >
+                  <button 
+                    onClick={() => closeBagPopupHandle()} 
+                    className={classes.bag_buttons_wrapper__cart__popup__opened__links__button}
+                  >View bag</button>
+                </Link>
+                <button 
+                  className={classes.bag_buttons_wrapper__cart__popup__opened__links__checkout_button}
+                >Check out</button>
+              </div>
           </>
         ) : (<h1 className={classes.wrapper__empty_cart}>
           Cart is empty
