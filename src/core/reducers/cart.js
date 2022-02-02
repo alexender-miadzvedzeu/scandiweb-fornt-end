@@ -115,41 +115,40 @@ const cartReducer = (state = initialState, action) => {
       }
     
     case cartTypes.LIST_IMAGE:
-      switch (action.opt) {
-        case 'prev':
-          return {
-            ...state,
-            shopingBag: [
-              ...state.shopingBag
-            ].map((el, index) =>
-              index === action.index ?
-                {
-                  ...el,
-                  currentImage: {
-                    ...el.currentImage,
-                    index: el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1,
-                    url: el.gallery[el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1]
-                  }
-                } : el
-            )
-          }
-        case 'next':
-          return {
-            ...state,
-            shopingBag: [
-              ...state.shopingBag
-            ].map((el, index) =>
-              index === action.index ?
-                {
-                  ...el,
-                  currentImage: {
-                    ...el.currentImage,
-                    index: el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1,
-                    url: el.gallery[el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1]
-                  }
-                } : el
-            )
-          }
+      if(action.opt === 'prev') {
+        return {
+          ...state,
+          shopingBag: [
+            ...state.shopingBag
+          ].map((el, index) =>
+            index === action.index ?
+              {
+                ...el,
+                currentImage: {
+                  ...el.currentImage,
+                  index: el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1,
+                  url: el.gallery[el.currentImage.index === 0 ? el.gallery.length - 1 : el.currentImage.index - 1]
+                }
+              } : el
+          )
+        }
+      } else if (action.opt === 'next') {
+        return {
+          ...state,
+          shopingBag: [
+            ...state.shopingBag
+          ].map((el, index) =>
+            index === action.index ?
+              {
+                ...el,
+                currentImage: {
+                  ...el.currentImage,
+                  index: el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1,
+                  url: el.gallery[el.currentImage.index === el.gallery.length - 1 ? 0 : el.currentImage.index + 1]
+                }
+              } : el
+          )
+        }
       }
       return {
         ...state

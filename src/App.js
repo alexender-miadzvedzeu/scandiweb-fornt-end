@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { loadCategoriesThunk, loadCurrenciesThunk } from './core/thunk/overal';
+import { loadCurrenciesThunk } from './core/thunk/overal';
 import { loadProductsByCategoryThunk } from './core/thunk/products';
 import Navbar from './components/Navbar/Navbar';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
@@ -9,20 +9,12 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import CartPage from './pages/CartPage/CartPage';
 import './App.css';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
 } from "react-router-dom";
 import { withRouter } from 'react-router';
 
 class App extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount(){
     const { currentCategory } = this.props

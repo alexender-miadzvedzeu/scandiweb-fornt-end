@@ -49,7 +49,7 @@ const overalReducer = (state = initialState, action) => {
         isLoading: false
       }
     
-    case overalTypes.LOAD_CURRENCIES_FAILED:
+    case overalTypes.LOAD_CATEGORIES_FAILED:
       return {
         ...state,
         isLoading: false,

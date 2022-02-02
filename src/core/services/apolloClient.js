@@ -1,8 +1,6 @@
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  useQuery,
   gql
 } from "@apollo/client";
 
@@ -48,7 +46,6 @@ export const loadProductsByCategoryFN = async name => {
           inStock,
           gallery,
           description,
-          category,
           attributes{
             id,
             name,
