@@ -72,39 +72,37 @@ const cartReducer = (state = initialState, action) => {
       }
 
     case cartTypes.CHANGE_PRODUCT_QUANITY_IN_CART: 
-      switch (action.val) {
-        case 'inc':
-          return {
-            ...state,
-            shopingBag: [
-              ...state.shopingBag
-            ].map((product, index) => {
-              if (index === action.index) {
-                return {
-                  ...product,
-                  quantity: product.quantity + 1
-                }
-              } return product
-            })
-          }
-        case 'dec':
-          return {
-            ...state,
-            shopingBag: [
-              ...state.shopingBag
-            ].map((product, index) => {
-              if (index === action.index) {
-                return {
-                  ...product,
-                  quantity: product.quantity > 0 ? product.quantity - 1 : product.quantity
-                }
-              } return product
-            })
-          }
-      
-        default:
-          return state;
+      if (action.val === 'inc') {
+        return {
+          ...state,
+          shopingBag: [
+            ...state.shopingBag
+          ].map((product, index) => {
+            if (index === action.index) {
+              return {
+                ...product,
+                quantity: product.quantity + 1
+              }
+            } return product
+          })
+        }
       }
+      if (action.val === 'dec') {
+        return {
+          ...state,
+          shopingBag: [
+            ...state.shopingBag
+          ].map((product, index) => {
+            if (index === action.index) {
+              return {
+                ...product,
+                quantity: product.quantity > 0 ? product.quantity - 1 : product.quantity
+              }
+            } return product
+          }).filter(product => product.quantity > 0)
+        }
+      }
+      return state
     
     case cartTypes.REMOVE_FROM_BAG:
       return {
@@ -132,7 +130,8 @@ const cartReducer = (state = initialState, action) => {
               } : el
           )
         }
-      } else if (action.opt === 'next') {
+      } 
+      if (action.opt === 'next') {
         return {
           ...state,
           shopingBag: [

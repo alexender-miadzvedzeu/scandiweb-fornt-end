@@ -152,18 +152,16 @@ class Navbar extends React.Component {
             <img src={Cart} alt="logo" />
             {quanity > 0 && <p className={classes.bag_buttons_wrapper__cart__quanity}>{quanity}</p>}
           </button>
-          <div 
+          {shopingBag && shopingBag.length > 0 && <div 
             onClick={this.closeBagPopupHandle.bind(this)} 
             className={!showBagPopup ? 
             classes.bag_buttons_wrapper__cart__popup : 
             classes.bag_buttons_wrapper__cart__popup__opened}
           >
-            {shopingBag && shopingBag.length > 0 && (
-              <div className={classes.bag_buttons_wrapper__cart__popup__opened__background}>
-                <Popup closeBagPopupHandle={this.closeBagPopupHandle.bind(this)} />
-              </div>
-            )}
-          </div>
+            <div className={classes.bag_buttons_wrapper__cart__popup__opened__background}>
+              <Popup closeBagPopupHandle={this.closeBagPopupHandle.bind(this)} />
+            </div>
+          </div>}
         </div>
       </div>
     )

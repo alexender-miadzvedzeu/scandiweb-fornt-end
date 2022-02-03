@@ -86,6 +86,11 @@
   text-transform: uppercase;
   cursor: pointer;
 }
+.wrapper__addToCartButton:disabled {
+  cursor: not-allowed;
+  background: #eee;
+  color: #3f3f3f;
+}
 .wrapper__error {
   position: absolute;
   top: 0;

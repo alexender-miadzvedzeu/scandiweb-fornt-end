@@ -36,7 +36,6 @@ class ProductPage extends React.Component {
     const addToCart = () => {
       if (isValidAttributes) {
         addProductToCart(currentProduct);
-        this.props.history.push('/cart')
       } else {
         this.setState({ 
           error: true,
@@ -80,10 +79,24 @@ class ProductPage extends React.Component {
                       </h3>
                       <div className={classes.wrapper__info__attributes__box}>
                         {atr.items.map(val => {
-                          return (
+                          return atr.name === 'Color' ? (
                             <div 
-                              style={{background: val.value}}
-                              onClick={() => changeProductAttribute(atr.id, val.value)} 
+                              style={{
+                                background: val.value, 
+                                width: '30px', 
+                                height: '30px',
+                                boxShadow: val.selected ? '0px 0px 5px 1px #000' : 'none'
+                              }}
+                              onClick={() => currentProduct.inStock && changeProductAttribute(atr.id, val.value)} 
+                              className={val.selected ? 
+                                classes.wrapper__info__attributes__box__attribute_selected : 
+                                classes.wrapper__info__attributes__box__attribute} 
+                              key={nanoid()}
+                            >
+                            </div>
+                          ) : (
+                            <div 
+                              onClick={() => currentProduct.inStock && changeProductAttribute(atr.id, val.value)} 
                               className={val.selected ? 
                                 classes.wrapper__info__attributes__box__attribute_selected : 
                                 classes.wrapper__info__attributes__box__attribute} 
@@ -107,7 +120,7 @@ class ProductPage extends React.Component {
                 </h3>
               </div>
               {error && <span className={classes.wrapper__error}>{errorText}</span>}
-              <button onClick={addToCart} className={classes.wrapper__addToCartButton}>
+              <button disabled={!currentProduct.inStock} onClick={addToCart} className={classes.wrapper__addToCartButton}>
                 Add to cart
               </button>
               <div 

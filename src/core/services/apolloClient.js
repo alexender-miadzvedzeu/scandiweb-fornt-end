@@ -79,7 +79,6 @@ export const loadProductByIdFN = async id => {
         inStock,
         gallery,
         description,
-        category,
         attributes{
           id,
           name,

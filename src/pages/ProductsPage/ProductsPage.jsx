@@ -10,14 +10,7 @@ class Products extends React.Component {
 
     return (
       <div className={classes.wrapper}>
-        {products && products.map(product => {
-          return (
-            product.inStock ? (
-              <Product key={product.id} product={product} inStock={product.inStock} />
-            ) : (
-              <Product key={product.id} product={product} inStock={product.inStock} />
-            ))
-        })}
+        {products && products.map(product => <Product key={product.id} product={product} inStock={product.inStock} />)}
       </div>
     )
   }

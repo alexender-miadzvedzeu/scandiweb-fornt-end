@@ -106,16 +106,16 @@ class Popup extends React.Component {
               })}
             </div>
             <div className={classes.bag_buttons_wrapper__cart__popup__opened__links}>
-                <Link to='/cart' >
-                  <button 
-                    onClick={() => closeBagPopupHandle()} 
-                    className={classes.bag_buttons_wrapper__cart__popup__opened__links__button}
-                  >View bag</button>
-                </Link>
+              <Link to='/cart' >
                 <button 
-                  className={classes.bag_buttons_wrapper__cart__popup__opened__links__checkout_button}
-                >Check out</button>
-              </div>
+                  onClick={() => closeBagPopupHandle()} 
+                  className={classes.bag_buttons_wrapper__cart__popup__opened__links__button}
+                >View bag</button>
+              </Link>
+              <button 
+                className={classes.bag_buttons_wrapper__cart__popup__opened__links__checkout_button}
+              >Check out</button>
+            </div>
           </>
         ) : (<h1 className={classes.wrapper__empty_cart}>
           Cart is empty

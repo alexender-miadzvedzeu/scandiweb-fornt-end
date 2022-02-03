@@ -21,9 +21,11 @@ class Product extends React.Component {
   }
 
   onCardOut() {
-    this.setState({
-      showCartButton: true
-    })
+    if (!this.props.product.attributes.length) {
+      this.setState({
+        showCartButton: true
+      })
+    }
   }
 
   addProductToCartHandle(product, e) {
@@ -54,11 +56,11 @@ class Product extends React.Component {
               {product.prices.filter(price => price.currency === currentCurrency)[0].amount}
             </div>
           </div>
+          {!inStock && <p className={classes.out_of_stock}>OUT OF STOCK</p>}
         </Link>
         {showCartButton && <div onClick={(e) => this.addProductToCartHandle(product, e)} className={classes.shopButton}>
           <img className={classes.shopButton__logo} alt="icon" src={ICON} />
         </div>}
-        {!inStock && <p className={classes.out_of_stock}>OUT OF STOCK</p>}
       </div>
     )
   }
